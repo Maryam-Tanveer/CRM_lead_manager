@@ -14,7 +14,7 @@ export const setStoredAccessToken = (token) => {
 export const getStoredAccessToken = () => accessToken;
 
 const proxy = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_URL || '/api',
   headers: {
     'Content-Type': 'application/json'
   },
@@ -76,7 +76,7 @@ proxy.interceptors.response.use(
       try {
         const storedRefreshToken = localStorage.getItem('lead_crm_refresh_token');
         const response = await axios.post(
-          '/api/auth/refresh',
+          `${import.meta.env.VITE_API_URL || '/api'}/auth/refresh`,
           { refreshToken: storedRefreshToken },
           { withCredentials: true }
         );

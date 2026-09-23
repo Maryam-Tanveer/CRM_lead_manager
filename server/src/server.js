@@ -8,15 +8,12 @@ const startServer = async () => {
   try {
     await connectDB();
     app.listen(PORT, () => {
-      process.stdout.write(`Server running on port ${PORT}\n`);
+      console.log(`Server running on port ${PORT}`);
     });
   } catch (error) {
-    process.stderr.write(`Failed to start server: ${error.message}\n`);
+    console.error(`Failed to start server: ${error.message}`);
     process.exit(1);
   }
 };
 
 startServer();
-
-
-// nodemon restart trigger
