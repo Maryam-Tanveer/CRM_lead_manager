@@ -7,24 +7,41 @@ const { errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
 
+
+
+
+
 const allowedOrigins = [
-  process.env.CLIENT_URL || 'http://localhost:5173',
+  process.env.CLIENT_URL,
+  'http://localhost:5173',
   'http://localhost:5174',
   'http://localhost:3000',
   'http://127.0.0.1:5173'
-];
+].filter(Boolean);
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (!origin) return callback(null, true);
+      
+      if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
+      
+      if (process.env.NODE_ENV === 'production') {
+        return callback(new Error('CORS not allowed'));
+      }
+      
       return callback(null, true);
     },
-    credentials: true
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
   })
 );
+
+
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

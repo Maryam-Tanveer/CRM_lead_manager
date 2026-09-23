@@ -13,13 +13,18 @@ export const setStoredAccessToken = (token) => {
 
 export const getStoredAccessToken = () => accessToken;
 
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
+
 const proxy = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json'
   },
   withCredentials: true
 });
+
+
 
 proxy.interceptors.request.use(
   (config) => {
@@ -75,11 +80,12 @@ proxy.interceptors.response.use(
 
       try {
         const storedRefreshToken = localStorage.getItem('lead_crm_refresh_token');
-        const response = await axios.post(
-          `${import.meta.env.VITE_API_URL || '/api'}/auth/refresh`,
-          { refreshToken: storedRefreshToken },
-          { withCredentials: true }
-        );
+        
+        const response = await proxy.post(
+  '/auth/refresh',
+  { refreshToken: storedRefreshToken }
+);
+
 
         const newAccessToken = response.data.data.accessToken;
         const newRefreshToken = response.data.data.refreshToken;
