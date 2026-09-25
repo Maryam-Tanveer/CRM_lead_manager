@@ -9,8 +9,7 @@ const connectDB = async () => {
     if (process.env.NODE_ENV === 'production') {
       throw new Error('MONGODB_URI is required in production!');
     }
-    
-    // Development: Use in-memory
+
     const { MongoMemoryServer } = require('mongodb-memory-server');
     memoryServer = await MongoMemoryServer.create();
     const memoryUri = memoryServer.getUri();
@@ -18,7 +17,6 @@ const connectDB = async () => {
     return conn;
   }
 
-  // Production: Use real database
   const conn = await mongoose.connect(uri);
   return conn;
 };

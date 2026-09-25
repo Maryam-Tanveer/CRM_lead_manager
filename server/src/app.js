@@ -23,16 +23,16 @@ app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
-      
-      if (allowedOrigins.includes(origin)) {
+
+            if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
-      
-      if (process.env.NODE_ENV === 'production') {
+
+            if (process.env.NODE_ENV === 'production') {
         return callback(new Error('CORS not allowed'));
       }
-      
-      return callback(null, true);
+
+            return callback(null, true);
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],

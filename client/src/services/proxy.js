@@ -80,8 +80,8 @@ proxy.interceptors.response.use(
 
       try {
         const storedRefreshToken = localStorage.getItem('lead_crm_refresh_token');
-        
-        const response = await proxy.post(
+
+                const response = await proxy.post(
   '/auth/refresh',
   { refreshToken: storedRefreshToken }
 );
