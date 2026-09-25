@@ -1,5 +1,13 @@
 # Mini CRM Lead Manager (MERN Stack)
 
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/Maryam-Tanveer/CRM_lead_manager)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-000000?style=for-the-badge&logo=vercel)](https://crm-lead-manager-client.vercel.app)
+
+> 🔗 **GitHub Repository:** https://github.com/Maryam-Tanveer/CRM_lead_manager
+> 🌐 **Live Demo:** https://crm-lead-manager-client.vercel.app
+
+---
+
 A modular, production-ready Lead Management System built as a MERN stack monorepo (`server/` + `client/`).
 
 ## System Architecture
